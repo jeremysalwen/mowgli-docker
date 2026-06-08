@@ -38,17 +38,12 @@ services:
       - ./config/db:/db
       - ./config/om:/config
       - /var/run/docker.sock:/var/run/docker.sock
-  web:
-    container_name: mowgli-web
-    labels:
-      project: openmower
-      app: web
-    image: nginx
-    ports:
-      - 4005:80
-    volumes:
-      - ./web:/usr/share/nginx/html:ro
+  OpenMowerApp:
+    image: ghcr.io/clemenselflein/openmowerapp:latest
+    container_name: OpenMowerApp
     restart: unless-stopped
+    ports:
+      - "4005:8080"
 
   mosquitto:
     container_name: mowgli-mqtt
